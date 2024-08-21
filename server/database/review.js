@@ -7,9 +7,9 @@ const reviews = new Schema({
     type: Number,
     required: true,
 	},
-	name: {
-    type: String,
-    required: true
+name: {
+type: String,
+required: true
   },
   dealership: {
     type: Number,

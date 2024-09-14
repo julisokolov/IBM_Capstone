@@ -30,7 +30,7 @@ def get_cars(request):
             "CarModel": car_model.name,
             "CarMake": car_model.car_make.name
         })
-    return JsonResponse({"CarModels":cars})
+    return JsonResponse({"CarModels": cars})
 
 
 # Get an instance of a logger
@@ -55,19 +55,16 @@ def login_user(request):
         data = {"userName": username,  "status": "Authenticated"}
     return JsonResponse(data)
 
-# Create a `logout_request` view to handle sign out request
+
 def logout_request(request):
     logout(request)
-    data = {"userName":""}
+    data = {"userName": ""}
     return JsonResponse(data)
 
-# Create a `registration` view to handle sign up request
-# @csrf_exempt
-# def registration(request):
+
 @csrf_exempt
 def registration(request):
-    context = {}
-
+    #context = {}
     data = json.loads(request.body)
     username = data['userName']
     password = data['password']
@@ -75,14 +72,13 @@ def registration(request):
     last_name = data['lastName']
     email = data['email']
     username_exist = False
-    email_exist = False
+    #email_exist = False
     try:
         # Check if user already exists
         User.objects.get(username=username)
         username_exist = True
-    except:
-        # If not,  simply log this is a new user
-        logger.debug("{} is new user".format(username))
+    except Exception as e:
+        print(f"An error occurred: {e}")
 
     # If it is a new user
     if not username_exist:

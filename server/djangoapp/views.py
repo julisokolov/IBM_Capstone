@@ -15,7 +15,9 @@ from django.views.decorators.csrf import csrf_exempt
 from .populate import initiate
 
 from .models import CarMake,  CarModel
-from .restapis import get_request,  analyze_review_sentiments,  post_review
+# original:
+# from .restapis import get_request,  analyze_review_sentiments,  post_review
+from .restapis import get_request,  analyze_review_sentiments
 
 
 def get_cars(request):
@@ -142,8 +144,8 @@ def add_review(request):
     if (not request.user.is_anonymous):
         data = json.loads(request.body)
         try:
-            # response = post_review(data)
-            return JsonResponse({"status": 200})
+            response = post_review(data)
+            return JsonResponse({"status": 200, "data": data})
         except Exception as e:  # Catching general exceptions
             print(f"An error occurred: {e}")
     else:

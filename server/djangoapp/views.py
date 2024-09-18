@@ -16,8 +16,7 @@ from .populate import initiate
 
 from .models import CarMake,  CarModel
 # original:
-# from .restapis import get_request,  analyze_review_sentiments,  post_review
-from .restapis import get_request,  analyze_review_sentiments
+from .restapis import get_request,  analyze_review_sentiments,  post_review
 
 
 def get_cars(request):
@@ -145,7 +144,7 @@ def add_review(request):
         data = json.loads(request.body)
         try:
             response = post_review(data)
-            return JsonResponse({"status": 200, "data": data})
+            return JsonResponse({"status": 200, "response": response})
         except Exception as e:  # Catching general exceptions
             print(f"An error occurred: {e}")
     else:
